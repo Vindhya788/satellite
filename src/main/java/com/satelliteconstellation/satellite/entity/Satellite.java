@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+//import java.util.Date;
 
 @Entity
 public class Satellite {
@@ -16,7 +16,7 @@ public class Satellite {
     private long satelliteId;
     private String satelliteName;
     private String country;
-    private Date launchDate = new Date();
+    private String launchDate;
     private String status;
 
     public long getSatelliteId() {
@@ -37,10 +37,10 @@ public class Satellite {
     public void setCountry(String country) {
         this.country = country;
     }
-    public Date getLaunchDate() {
+    public String getLaunchDate() {
         return launchDate;
     }
-    public void setLaunchDate(Date launchDate) {
+    public void setLaunchDate(String launchDate) {
         this.launchDate = launchDate;
     }
     public String getStatus() {

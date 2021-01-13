@@ -5,7 +5,10 @@ import java.util.Optional;
 import com.satelliteconstellation.satellite.repository.SatelliteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import com.satelliteconstellation.satellite.VO.Location;
+import com.satelliteconstellation.satellite.VO.ResponseTemplate;
 import com.satelliteconstellation.satellite.entity.Satellite;
 
 
@@ -14,6 +17,9 @@ public class SatelliteService {
 
     @Autowired
     SatelliteRepository SatelliteRepository;
+    
+    @Autowired
+    private RestTemplate restTemplate;
 
     public void saveSatellite(Satellite Satellite) {
         SatelliteRepository.save(Satellite);
@@ -40,4 +46,32 @@ public class SatelliteService {
         return SatelliteRepository.save(existingSatellite);
 
     }
+
+	public ResponseTemplate getSatelliteWithLocation(long id) {
+		ResponseTemplate vo = new ResponseTemplate();
+		Satellite satellite = SatelliteRepository.findBySatelliteId(id);
+		Location location = restTemplate.getForObject("http://localhost:9080/location/" + satellite.getSatelliteId(), Location.class );
+	
+		vo.setSatellite(satellite);
+		vo.setLocation(location);
+		return vo;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

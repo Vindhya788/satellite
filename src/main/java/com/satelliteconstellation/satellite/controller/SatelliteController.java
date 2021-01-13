@@ -4,8 +4,11 @@ import java.util.Optional;
 
 import com.satelliteconstellation.satellite.exceptions.InvalidSatelliteReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.satelliteconstellation.satellite.VO.ResponseTemplate;
 import com.satelliteconstellation.satellite.entity.Satellite;
 import com.satelliteconstellation.satellite.service.SatelliteService;
 
@@ -53,5 +56,13 @@ public class SatelliteController {
 
         throw new InvalidSatelliteReferenceException("Invalid Satellite reference provided");
         }
+        
     }
+        @GetMapping("/location/{id}")
+        public ResponseTemplate getSatelliteWithLocation(@PathVariable("id") long id) {
+        	return satelliteService.getSatelliteWithLocation(id);
+        }
+   
+    
+    
 }
